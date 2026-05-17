@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melbourne Runs on Coffee</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    /* ── CSS Variables ─────────────────────────────────────────── */
+    :root {
+      --espresso:  #3E1F00;
+      --mocha:     #7A4F2E;
+      --caramel:   #C8843A;
+      --latte:     #D4A96A;
+      --cream:     #FAF6EE;
+      --parchment: #F0E6D0;
+      --warm-grey: #8C7B6B;
+      --dark-text: #2A1A0E;
+      --font-head: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lato', sans-serif;
+    }
+
+    /* ── Reset & Base ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Typography ────────────────────────────────────────────── */
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 700; line-height: 1.2; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5rem); color: var(--cream); }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--espresso); margin-bottom: 0.5rem; }
+    h3 { font-size: 1.2rem; color: var(--mocha); margin-bottom: 0.4rem; }
+    p  { color: var(--dark-text); max-width: 72ch; margin-bottom: 1rem; }
+    em { font-family: var(--font-head); font-style: italic; color: var(--mocha); }
+
+    /* ── Layout Helpers ────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section:nth-child(even) {
+      background: var(--parchment);
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--caramel);
+      margin: 1rem 0 2rem;
+    }
+
+    /* Two-column grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* Full-width chart row */
+    .chart-full {
+      width: 100%;
+      margin: 2rem 0;
+    }
+
+    /* Side-by-side charts */
+    .chart-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .chart-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    /* Chart container card */
+    .chart-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(62,31,0,0.07);
+    }
+
+    .chart-card h3 {
+      margin-bottom: 0.2rem;
+    }
+
+    .chart-caption {
+      font-size: 0.85rem;
+      color: var(--warm-grey);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    #hero {
+      background: var(--espresso);
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(200,132,58,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(122,79,46,0.2) 0%, transparent 50%);
+      padding: 6rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '☕';
+      position: absolute;
+      font-size: 20rem;
+      opacity: 0.04;
+      right: -2rem;
+      top: -3rem;
+      pointer-events: none;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      color: var(--latte);
+      margin: 1.5rem 0 3rem;
+      max-width: 60ch;
+      font-weight: 300;
+    }
+
+    /* ── Stat Cards ────────────────────────────────────────────── */
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(212,169,106,0.25);
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--caramel);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--latte);
+      margin-top: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Section Label (eyebrow text) ──────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Annotation Box ────────────────────────────────────────── */
+    .annotation {
+      border-left: 3px solid var(--caramel);
+      padding: 0.75rem 1.25rem;
+      background: rgba(200,132,58,0.07);
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--mocha);
+    }
+
+    /* ── Gem Score Formula Box ─────────────────────────────────── */
+    .formula-box {
+      background: var(--espresso);
+      color: var(--cream);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .formula-box .formula {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      color: var(--caramel);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .formula-box p {
+      color: var(--latte);
+      font-size: 0.9rem;
+      max-width: 100%;
+    }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    #footer {
+      background: var(--espresso);
+      color: var(--latte);
+      padding: 3rem 0;
+      font-size: 0.85rem;
+    }
+
+    #footer h3 {
+      color: var(--caramel);
+      font-family: var(--font-head);
+      margin-bottom: 1rem;
+    }
+
+    #footer a {
+      color: var(--latte);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    #footer .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+    }
+
+    #footer .source-list {
+      list-style: none;
+      line-height: 2;
+    }
+
+    #footer .author-note {
+      font-size: 0.78rem;
+      color: var(--warm-grey);
+      margin-top: 1rem;
+    }
+
+    /* ── Vega embed tweaks ─────────────────────────────────────── */
+    .vega-embed { width: 100% !important; }
+    .vega-embed summary { display: none !important; }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .grid-2, .chart-row, .chart-row-3, .stat-cards { grid-template-columns: 1fr; }
+      .container { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <p class="eyebrow" style="color:var(--caramel)">Melbourne · Inner City · 2002–2024</p>
+    <h1>Melbourne<br><em style="color:var(--latte)">Runs on Coffee</em></h1>
+    <p class="hero-subtitle">
+      From Carlton's cobblestone laneways to Southbank's riverside terraces,
+      Melbourne's cafe scene has grown into one of the world's most dense and celebrated.
+      Here's the data behind the flat white.
+    </p>
+    <div class="stat-cards">
+      <div class="stat-card">
+        <span class="stat-number">1,073</span>
+        <span class="stat-label">Cafes &amp; restaurants in Melbourne's inner city (2024)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">128K+</span>
+        <span class="stat-label">Total dining seats available across 13 inner suburbs</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">+55%</span>
+        <span class="stat-label">Growth in cafe numbers since 2002</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 1 — WHERE ARE THE CAFES?
+════════════════════════════════════════════════════════════════ -->
+<section class="section" id="section-map">
+  <div class="container">
+    <p class="eyebrow">Section 1</p>
+    <h2>Where Are the Cafes?</h2>
+    <div class="divider"></div>
+    <p>
+      Not all Melbourne suburbs are created equal when it comes to coffee.
+      The CBD dominates with sheer volume, but Carlton and Southbank punch well above
+      their size. The map below shows cafe density across Melbourne's inner areas —
+      and where individual cafes are actually located.
+    </p>
+
+    <!-- Chart 1+2: Choropleth + Dot Map -->
+    <div class="chart-card chart-full">
+      <h3>Cafe density across inner Melbourne (2024)</h3>
+      <div id="chart-map"></div>
+      <p class="chart-caption">
+        Colour shows total cafe count per CLUE small area. Dots show individual cafe locations.
+        Data: City of Melbourne CLUE 2024.
+      </p>
+    </div>
+
+    <div class="annotation">
+      Carlton has more cafes per square kilometre than almost any neighbourhood in Australia —
+      a legacy of its Italian migrant community and its proximity to Melbourne University.
+    </div>
+
+    <!-- Chart 3+4: Bar + Scatter -->
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Top suburbs by cafe count</h3>
+        <div id="chart-bar"></div>
+        <p class="chart-caption">Total number of cafes and restaurants per area, 2024.</p>
+      </div>
+      <div class="chart-card">
+        <h3>Cafes vs. total seats by suburb</h3>
+        <div id="chart-scatter"></div>
+        <p class="chart-caption">
+          Each bubble is a suburb. X = cafe count, Y = total seats, size = area population.
+          Docklands has fewer cafes but larger venues than Carlton.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 2 — TWENTY YEARS OF GROWTH
+════════════════════════════════════════════════════════════════ -->
+<section class="section" id="section-growth">
+  <div class="container">
+    <p class="eyebrow">Section 2</p>
+    <h2>Twenty Years of Growth</h2>
+    <div class="divider"></div>
+    <p>
+      Melbourne's cafe scene has grown almost every single year since records began in 2002 —
+      until COVID hit. The pandemic caused the city's first ever decline in cafe numbers,
+      but the scene has since recovered strongly.
+    </p>
+
+    <!-- Chart 5+6: Area chart + growth rate -->
+    <div class="chart-card chart-full">
+      <h3>Melbourne cafe count &amp; annual growth rate, 2002–2024</h3>
+      <div id="chart-growth"></div>
+      <p class="chart-caption">
+        Bars show total cafes per year. Line shows year-on-year growth rate (%).
+        Data: City of Melbourne CLUE 2002–2024.
+      </p>
+    </div>
+
+    <div class="annotation">
+      COVID-19 caused Melbourne's first ever decline in cafe numbers — a 5.7% drop in 2020.
+      But by 2024 the scene had not only recovered but reached near-record levels.
+    </div>
+
+    <!-- Chart 7: Heatmap -->
+    <div class="chart-card chart-full">
+      <h3>Cafe openings by suburb and year</h3>
+      <div id="chart-heatmap"></div>
+      <p class="chart-caption">
+        Each cell shows the number of cafes in that suburb in that year.
+        Darker = more cafes. Watch Docklands emerge from 2010 onward as the area was developed.
+      </p>
+    </div>
+
+    <!-- Chart 8: Bump chart -->
+    <div class="chart-card chart-full">
+      <h3>How suburb rankings have shifted over time</h3>
+      <div id="chart-bump"></div>
+      <p class="chart-caption">
+        Suburb rankings by cafe count, 2002–2024. Lower rank = more cafes.
+        The CBD has always dominated; Docklands rose rapidly from 2010.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 3 — INSIDE VS OUTSIDE
+════════════════════════════════════════════════════════════════ -->
+<section class="section" id="section-seating">
+  <div class="container">
+    <p class="eyebrow">Section 3</p>
+    <h2>Inside vs. Outside</h2>
+    <div class="divider"></div>
+    <p>
+      Melbourne's famous laneway culture means outdoor seating is a serious business.
+      Southbank's riverside position gives it a uniquely high proportion of al fresco dining,
+      while the CBD's indoor dominance reflects its high-rise office clientele.
+    </p>
+
+    <!-- Chart 9+10: Donut + Stacked bar -->
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>City-wide seating split</h3>
+        <div id="chart-donut"></div>
+        <p class="chart-caption">Indoor vs. outdoor proportion across all inner Melbourne cafes, 2024.</p>
+      </div>
+      <div class="chart-card">
+        <h3>Indoor vs. outdoor seats by suburb</h3>
+        <div id="chart-stacked"></div>
+        <p class="chart-caption">Top suburbs ranked by total seats. Southbank leads in outdoor proportion.</p>
+      </div>
+    </div>
+
+    <div class="annotation">
+      Southbank's riverside position gives it the highest outdoor seating proportion in the city —
+      perfect for Melbourne's (occasionally) sunny days.
+    </div>
+
+    <!-- Chart 11: Small multiples -->
+    <div class="chart-card chart-full">
+      <h3>Seating growth over time — top suburbs</h3>
+      <div id="chart-multiples"></div>
+      <p class="chart-caption">
+        Each panel shows one suburb's indoor (dark) and outdoor (light) seat count over time.
+        Note how Docklands surged from near-zero in 2002.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 4 — HIDDEN GEMS
+════════════════════════════════════════════════════════════════ -->
+<section class="section" id="section-gems">
+  <div class="container">
+    <p class="eyebrow">Section 4</p>
+    <h2>Hidden Gem Suburbs</h2>
+    <div class="divider"></div>
+    <p>
+      The CBD has the most cafes — but it also has the most people competing for those seats.
+      What if you looked for suburbs where the <em>supply</em> of cafe seats outpaces the
+      resident population? These are Melbourne's hidden gem neighbourhoods: more seats per
+      person, less waiting, better experience.
+    </p>
+
+    <!-- Gem Score Formula -->
+    <div class="formula-box">
+      <p style="color:var(--latte); font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase;">How we calculate the Gem Score</p>
+      <div class="formula">Gem Score = (Cafes per 1,000 residents + Seats per 1,000 residents) ÷ 2</div>
+      <p>Normalised to a 0–100 scale across all 13 inner Melbourne suburbs. A higher score means more cafe access relative to the local population — less crowding, more choice.</p>
+    </div>
+
+    <!-- Chart 12+13: Gem scatter + second choropleth -->
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Gem score: cafes vs. seats per resident</h3>
+        <div id="chart-gem-scatter"></div>
+        <p class="chart-caption">
+          Each bubble is a suburb. X = cafes per 1,000 residents, Y = seats per 1,000 residents.
+          Top-right = hidden gem territory.
+        </p>
+      </div>
+      <div class="chart-card">
+        <h3>Gem score map</h3>
+        <div id="chart-gem-map"></div>
+        <p class="chart-caption">
+          Suburbs coloured by gem score. Darker = higher score = more cafe access per resident.
+        </p>
+      </div>
+    </div>
+
+    <!-- Chart 14: Waffle -->
+    <div class="chart-card chart-full">
+      <h3>Every cafe in the top 5 gem suburbs</h3>
+      <div id="chart-waffle"></div>
+      <p class="chart-caption">
+        Each square represents one cafe. Colour shows whether indoor seating dominates (dark)
+        or outdoor (light). Top 5 suburbs ranked by gem score.
+      </p>
+    </div>
+
+    <div class="annotation">
+      Docklands scores surprisingly high — its large waterfront venues mean an enormous
+      number of seats relative to its modest resident population.
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Data Sources</h3>
+        <ul class="source-list">
+          <li>
+            City of Melbourne — Café, restaurant, bistro seats (CLUE 2002–2024)<br>
+            <a href="https://data.melbourne.vic.gov.au/explore/dataset/cafes-and-restaurants-with-seating-capacity/" target="_blank">data.melbourne.vic.gov.au</a>
+          </li>
+          <li>
+            City of Melbourne — Small Areas for Census of Land Use and Employment (CLUE)<br>
+            <a href="https://data.melbourne.vic.gov.au/explore/dataset/small-areas-for-census-of-land-use-and-employment-clue/" target="_blank">data.melbourne.vic.gov.au</a>
+          </li>
+          <li>
+            Australian Bureau of Statistics — 2021 Census General Community Profile, Suburbs and Localities (VIC)<br>
+            <a href="https://www.abs.gov.au/census/find-census-data/datapacks" target="_blank">abs.gov.au</a>
+          </li>
+        </ul>
+        <p class="author-note">
+          AI tools (Claude by Anthropic) were used to assist with data cleaning, code generation,
+          and grammar checking. All visualisation design, analysis, and editorial decisions are the author's own.
+        </p>
+      </div>
+      <div>
+        <h3>About</h3>
+        <p style="color:var(--latte); font-size:0.85rem;">
+          Created for FIT2179 Data Visualisation, Monash University, Semester 1 2026.<br><br>
+          <strong style="color:var(--caramel);">Author:</strong> Eugene Sulistyo<br>
+          <strong style="color:var(--caramel);">Date:</strong> May 2026<br><br>
+          Data licensed under CC BY — City of Melbourne Open Data.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     VEGA-LITE CHART SCRIPTS
+     Each chart loads its JSON spec from the /charts/ folder
+════════════════════════════════════════════════════════════════ -->
+<script>
+  const opt = { actions: false, renderer: 'svg' };
+
+  // Chart 1+2: Choropleth + dot map
+  vegaEmbed('#chart-map', 'charts/map.json', opt);
+
+  // Chart 3: Horizontal bar
+  vegaEmbed('#chart-bar', 'charts/bar.json', opt);
+
+  // Chart 4: Bubble scatter
+  vegaEmbed('#chart-scatter', 'charts/scatter.json', opt);
+
+  // Chart 5+6: Area + growth rate
+  vegaEmbed('#chart-growth', 'charts/growth.json', opt);
+
+  // Chart 7: Heatmap
+  vegaEmbed('#chart-heatmap', 'charts/heatmap.json', opt);
+
+  // Chart 8: Bump chart
+  vegaEmbed('#chart-bump', 'charts/bump.json', opt);
+
+  // Chart 9: Donut
+  vegaEmbed('#chart-donut', 'charts/donut.json', opt);
+
+  // Chart 10: Stacked bar
+  vegaEmbed('#chart-stacked', 'charts/stacked.json', opt);
+
+  // Chart 11: Small multiples
+  vegaEmbed('#chart-multiples', 'charts/multiples.json', opt);
+
+  // Chart 12: Gem scatter
+  vegaEmbed('#chart-gem-scatter', 'charts/gem_scatter.json', opt);
+
+  // Chart 13: Gem map
+  vegaEmbed('#chart-gem-map', 'charts/gem_map.json', opt);
+
+  // Chart 14: Waffle
+  vegaEmbed('#chart-waffle', 'charts/waffle.json', opt);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 520,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "legend": {
+      "labelFont": "Lato",
+      "titleFont": "Lato",
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#3E1F00",
+      "labelColor": "#3E1F00"
+    },
+    "view": { "stroke": null }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/suburbs.geojson",
+        "format": { "type": "json", "property": "features" }
+      },
+      "transform": [
+        {
+          "lookup": "properties.featurenam",
+          "from": {
+            "data": { "url": "data/cafes_2024.csv" },
+            "key": "area",
+            "fields": ["cafe_count", "total_seats"]
+          }
+        }
+      ],
+      "projection": { "type": "mercator" },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#FAF6EE",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "cafe_count",
+          "type": "quantitative",
+          "scale": {
+            "range": ["#F5ECD7", "#D4A96A", "#C8843A", "#7A4F2E", "#3E1F00"],
+            "domain": [0, 50, 100, 200, 600]
+          },
+          "legend": {
+            "title": "Cafes (2024)",
+            "orient": "bottom-right",
+            "gradientLength": 140,
+            "gradientThickness": 12
+          }
+        },
+        "tooltip": [
+          { "field": "properties.featurenam", "type": "nominal",      "title": "Suburb"       },
+          { "field": "cafe_count",             "type": "quantitative", "title": "Cafes"        },
+          { "field": "total_seats",            "type": "quantitative", "title": "Total seats"  }
+        ]
+      }
+    },
+    {
+      "data": { "url": "data/cafes_dots_2024.csv" },
+      "projection": { "type": "mercator" },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.45,
+        "size": 14,
+        "color": "#FAF6EE",
+        "stroke": "#3E1F00",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude":  { "field": "lat", "type": "quantitative" },
+        "tooltip": [
+          { "field": "area", "type": "nominal", "title": "Suburb" }
+        ]
+      }
+    }
+  ]
+}

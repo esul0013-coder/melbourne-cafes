@@ -1,0 +1,291 @@
+year,area,cafe_count,indoor_seats,outdoor_seats,total_seats
+2002,Carlton,118,9198,1903,11101
+2002,Docklands,7,4699,226,4925
+2002,East Melbourne,20,2746,171,2917
+2002,Kensington,2,52,32,84
+2002,Melbourne (CBD),443,42369,4814,47183
+2002,Melbourne (Remainder),15,6293,614,6907
+2002,North Melbourne,26,1171,177,1348
+2002,Parkville,7,926,222,1148
+2002,Port Melbourne,2,67,24,91
+2002,South Yarra,5,522,68,590
+2002,Southbank,23,5582,1830,7412
+2002,West Melbourne (Industrial),3,368,50,418
+2002,West Melbourne (Residential),23,1134,91,1225
+2003,Carlton,120,9171,2383,11554
+2003,Docklands,13,6048,986,7034
+2003,East Melbourne,24,3768,290,4058
+2003,Kensington,2,52,32,84
+2003,Melbourne (CBD),443,42369,4814,47183
+2003,Melbourne (Remainder),15,6293,614,6907
+2003,North Melbourne,31,1480,285,1765
+2003,Parkville,7,1263,265,1528
+2003,Port Melbourne,2,67,24,91
+2003,South Yarra,5,522,68,590
+2003,Southbank,23,5582,1830,7412
+2003,West Melbourne (Industrial),3,368,50,418
+2003,West Melbourne (Residential),23,991,121,1112
+2004,Carlton,120,9171,2383,11554
+2004,Docklands,13,6048,986,7034
+2004,East Melbourne,24,3768,290,4058
+2004,Kensington,2,70,34,104
+2004,Melbourne (CBD),460,42648,7121,49769
+2004,Melbourne (Remainder),17,6577,841,7418
+2004,North Melbourne,31,1480,285,1765
+2004,Parkville,7,1263,265,1528
+2004,Port Melbourne,4,279,94,373
+2004,South Yarra,6,492,93,585
+2004,Southbank,23,5713,1827,7540
+2004,West Melbourne (Industrial),3,368,50,418
+2004,West Melbourne (Residential),23,991,121,1112
+2005,Carlton,128,9663,2525,12188
+2005,Docklands,25,8701,2113,10814
+2005,East Melbourne,31,5469,543,6012
+2005,Kensington,2,70,34,104
+2005,Melbourne (CBD),467,43965,8180,52145
+2005,Melbourne (Remainder),17,6577,841,7418
+2005,North Melbourne,37,1557,407,1964
+2005,Parkville,7,1013,500,1513
+2005,Port Melbourne,4,279,94,373
+2005,South Yarra,6,492,93,585
+2005,Southbank,23,5713,1827,7540
+2005,West Melbourne (Industrial),2,328,50,378
+2005,West Melbourne (Residential),26,1106,131,1237
+2006,Carlton,128,9663,2525,12188
+2006,Docklands,25,8701,2113,10814
+2006,East Melbourne,31,5469,543,6012
+2006,Kensington,3,105,32,137
+2006,Melbourne (CBD),483,45044,8415,53459
+2006,Melbourne (Remainder),17,6500,877,7377
+2006,North Melbourne,37,1557,407,1964
+2006,Parkville,7,1013,500,1513
+2006,Port Melbourne,4,328,136,464
+2006,South Yarra,7,566,96,662
+2006,Southbank,26,6260,2127,8387
+2006,West Melbourne (Industrial),2,328,50,378
+2006,West Melbourne (Residential),26,1106,131,1237
+2007,Carlton,138,10059,2894,12953
+2007,Docklands,30,9232,2228,11460
+2007,East Melbourne,35,5238,625,5863
+2007,Kensington,3,105,32,137
+2007,Melbourne (CBD),495,45268,8688,53956
+2007,Melbourne (Remainder),17,6500,877,7377
+2007,North Melbourne,38,1754,391,2145
+2007,Parkville,9,1090,583,1673
+2007,Port Melbourne,4,328,136,464
+2007,South Yarra,7,566,96,662
+2007,Southbank,26,6260,2127,8387
+2007,West Melbourne (Industrial),2,177,67,244
+2007,West Melbourne (Residential),26,1045,167,1212
+2008,Carlton,138,10059,2894,12953
+2008,Docklands,30,9232,2228,11460
+2008,East Melbourne,35,5238,625,5863
+2008,Kensington,12,365,163,528
+2008,Melbourne (CBD),513,47224,9676,56900
+2008,Melbourne (Remainder),21,6813,1405,8218
+2008,North Melbourne,38,1754,391,2145
+2008,Parkville,9,1090,583,1673
+2008,Port Melbourne,4,343,140,483
+2008,South Yarra,7,586,79,665
+2008,Southbank,26,6617,2120,8737
+2008,West Melbourne (Industrial),2,177,67,244
+2008,West Melbourne (Residential),26,1045,167,1212
+2009,Carlton,147,10395,3056,13451
+2009,Docklands,47,10574,2884,13458
+2009,East Melbourne,34,5272,789,6061
+2009,Kensington,12,365,163,528
+2009,Melbourne (CBD),532,50403,10507,60910
+2009,Melbourne (Remainder),21,6813,1405,8218
+2009,North Melbourne,46,2092,500,2592
+2009,Parkville,9,1090,583,1673
+2009,Port Melbourne,4,343,140,483
+2009,South Yarra,7,586,79,665
+2009,Southbank,26,6617,2120,8737
+2009,West Melbourne (Industrial),2,327,67,394
+2009,West Melbourne (Residential),28,1047,203,1250
+2010,Carlton,147,10395,3056,13451
+2010,Docklands,47,10574,2884,13458
+2010,East Melbourne,34,5272,789,6061
+2010,Kensington,12,365,163,528
+2010,Melbourne (CBD),547,52276,11041,63317
+2010,Melbourne (Remainder),20,1858,1644,3502
+2010,North Melbourne,46,2092,500,2592
+2010,Parkville,11,992,865,1857
+2010,Port Melbourne,8,613,275,888
+2010,South Yarra,7,586,79,665
+2010,Southbank,26,6617,2120,8737
+2010,West Melbourne (Industrial),2,327,67,394
+2010,West Melbourne (Residential),28,1047,203,1250
+2011,Carlton,147,10395,3056,13451
+2011,Docklands,47,10574,2884,13458
+2011,East Melbourne,34,5272,789,6061
+2011,Kensington,14,486,199,685
+2011,Melbourne (CBD),567,55013,11814,66827
+2011,Melbourne (Remainder),20,1858,1644,3502
+2011,North Melbourne,46,2092,500,2592
+2011,Parkville,11,992,865,1857
+2011,Port Melbourne,8,613,275,888
+2011,South Yarra,7,573,112,685
+2011,Southbank,37,9536,2463,11999
+2011,West Melbourne (Industrial),2,327,67,394
+2011,West Melbourne (Residential),28,1047,203,1250
+2012,Carlton,148,10269,3090,13359
+2012,Docklands,45,11966,3583,15549
+2012,East Melbourne,35,5361,849,6210
+2012,Kensington,14,486,199,685
+2012,Melbourne (CBD),579,56468,12291,68759
+2012,Melbourne (Remainder),20,1858,1644,3502
+2012,North Melbourne,47,2245,504,2749
+2012,Parkville,11,1122,819,1941
+2012,Port Melbourne,8,613,275,888
+2012,South Yarra,7,573,112,685
+2012,Southbank,37,9536,2463,11999
+2012,West Melbourne (Industrial),1,312,67,379
+2012,West Melbourne (Residential),32,1127,266,1393
+2013,Carlton,148,10269,3090,13359
+2013,Docklands,45,11966,3583,15549
+2013,East Melbourne,35,5361,849,6210
+2013,Kensington,21,741,275,1016
+2013,Melbourne (CBD),605,59908,13027,72935
+2013,Melbourne (Remainder),23,1971,1795,3766
+2013,North Melbourne,47,2245,504,2749
+2013,Parkville,11,1122,819,1941
+2013,Port Melbourne,7,599,339,938
+2013,South Yarra,6,531,114,645
+2013,Southbank,46,12865,3732,16597
+2013,West Melbourne (Industrial),1,312,67,379
+2013,West Melbourne (Residential),32,1127,266,1393
+2014,Carlton,155,10211,3508,13719
+2014,Docklands,57,14196,3613,17809
+2014,East Melbourne,32,5479,828,6307
+2014,Kensington,21,741,275,1016
+2014,Melbourne (CBD),608,63371,13176,76547
+2014,Melbourne (Remainder),23,1971,1795,3766
+2014,North Melbourne,50,2539,645,3184
+2014,Parkville,14,1530,1014,2544
+2014,Port Melbourne,7,599,339,938
+2014,South Yarra,6,531,114,645
+2014,Southbank,46,12865,3732,16597
+2014,West Melbourne (Industrial),1,290,67,357
+2014,West Melbourne (Residential),32,1104,253,1357
+2015,Carlton,155,10211,3508,13719
+2015,Docklands,57,14196,3613,17809
+2015,East Melbourne,32,5479,828,6307
+2015,Kensington,23,940,306,1246
+2015,Melbourne (CBD),621,64387,13302,77689
+2015,Melbourne (Remainder),23,2184,1276,3460
+2015,North Melbourne,50,2539,645,3184
+2015,Parkville,14,1530,1014,2544
+2015,Port Melbourne,7,597,330,927
+2015,South Yarra,6,613,136,749
+2015,Southbank,50,12907,4042,16949
+2015,West Melbourne (Industrial),1,290,67,357
+2015,West Melbourne (Residential),32,1104,253,1357
+2016,Carlton,171,11531,3597,15128
+2016,Docklands,65,15378,3834,19212
+2016,East Melbourne,36,5688,868,6556
+2016,Kensington,23,940,306,1246
+2016,Melbourne (CBD),623,64560,13264,77824
+2016,Melbourne (Remainder),23,2184,1276,3460
+2016,North Melbourne,58,2915,692,3607
+2016,Parkville,19,1960,973,2933
+2016,Port Melbourne,7,597,330,927
+2016,South Yarra,6,613,136,749
+2016,Southbank,50,12907,4042,16949
+2016,West Melbourne (Residential),28,1004,296,1300
+2017,Carlton,171,11531,3597,15128
+2017,Docklands,65,15378,3834,19212
+2017,East Melbourne,36,5688,868,6556
+2017,Kensington,24,959,278,1237
+2017,Melbourne (CBD),627,65448,13320,78768
+2017,Melbourne (Remainder),20,1975,1156,3131
+2017,North Melbourne,58,2915,692,3607
+2017,Parkville,19,1960,973,2933
+2017,Port Melbourne,9,759,348,1107
+2017,South Yarra,6,613,136,749
+2017,Southbank,51,13545,3926,17471
+2017,West Melbourne (Residential),28,1004,296,1300
+2018,Carlton,163,10356,3396,13752
+2018,Docklands,69,14699,3691,18390
+2018,East Melbourne,35,5600,779,6379
+2018,Kensington,24,959,278,1237
+2018,Melbourne (CBD),636,65755,12069,77824
+2018,Melbourne (Remainder),20,1975,1156,3131
+2018,North Melbourne,60,2985,682,3667
+2018,Parkville,18,2158,854,3012
+2018,Port Melbourne,9,759,348,1107
+2018,South Yarra,6,613,136,749
+2018,Southbank,51,13545,3926,17471
+2018,West Melbourne (Residential),35,1212,325,1537
+2019,Carlton,163,10356,3396,13752
+2019,Docklands,69,14699,3691,18390
+2019,East Melbourne,35,5600,779,6379
+2019,Kensington,22,953,263,1216
+2019,Melbourne (CBD),635,65643,11588,77231
+2019,Melbourne (Remainder),19,1896,1212,3108
+2019,North Melbourne,60,2985,682,3667
+2019,Parkville,18,2158,854,3012
+2019,Port Melbourne,10,765,414,1179
+2019,South Yarra,7,663,136,799
+2019,Southbank,52,13590,3828,17418
+2019,West Melbourne (Residential),35,1212,325,1537
+2020,Carlton,157,10326,2942,13268
+2020,Docklands,71,13359,3615,16974
+2020,East Melbourne,31,5216,747,5963
+2020,Kensington,22,953,263,1216
+2020,Melbourne (CBD),595,59537,10628,70165
+2020,Melbourne (Remainder),17,1765,1128,2893
+2020,North Melbourne,53,2586,524,3110
+2020,Parkville,15,1996,834,2830
+2020,Port Melbourne,10,765,414,1179
+2020,South Yarra,7,663,136,799
+2020,Southbank,50,13093,3754,16847
+2020,West Melbourne (Residential),33,1284,264,1548
+2021,Carlton,157,10326,2942,13268
+2021,Docklands,70,9585,3822,13407
+2021,East Melbourne,31,5216,747,5963
+2021,Kensington,20,832,209,1041
+2021,Melbourne (CBD),590,59137,10447,69584
+2021,Melbourne (Remainder),17,1731,1034,2765
+2021,North Melbourne,53,2586,524,3110
+2021,Parkville,15,1996,834,2830
+2021,Port Melbourne,8,635,300,935
+2021,South Yarra,6,564,118,682
+2021,Southbank,48,12633,3685,16318
+2021,West Melbourne (Residential),33,1284,264,1548
+2022,Carlton,153,10096,3198,13294
+2022,Docklands,70,9585,3822,13407
+2022,East Melbourne,26,4796,633,5429
+2022,Kensington,20,832,209,1041
+2022,Melbourne (CBD),564,57047,9405,66452
+2022,Melbourne (Remainder),17,1731,1034,2765
+2022,North Melbourne,55,2592,655,3247
+2022,Parkville,14,1639,701,2340
+2022,Port Melbourne,8,635,300,935
+2022,South Yarra,6,564,118,682
+2022,Southbank,48,12633,3685,16318
+2022,West Melbourne (Residential),30,1018,342,1360
+2023,Carlton,164,10539,3199,13738
+2023,Docklands,63,9284,3387,12671
+2023,East Melbourne,26,1567,451,2018
+2023,Kensington,22,1064,208,1272
+2023,Melbourne (CBD),564,57047,9405,66452
+2023,Melbourne (Remainder),18,1695,979,2674
+2023,North Melbourne,58,2771,753,3524
+2023,Parkville,16,1477,681,2158
+2023,Port Melbourne,9,613,299,912
+2023,South Yarra,6,555,189,744
+2023,Southbank,52,12357,3784,16141
+2023,West Melbourne (Residential),36,1429,244,1673
+2024,Carlton,164,10539,3199,13738
+2024,Docklands,63,9284,3387,12671
+2024,East Melbourne,26,1567,451,2018
+2024,Kensington,22,1064,208,1272
+2024,Melbourne (CBD),603,63408,9290,72698
+2024,Melbourne (Remainder),18,1695,979,2674
+2024,North Melbourne,58,2771,753,3524
+2024,Parkville,16,1477,681,2158
+2024,Port Melbourne,9,613,299,912
+2024,South Yarra,6,555,189,744
+2024,Southbank,52,12357,3784,16141
+2024,West Melbourne (Residential),36,1429,244,1673
