@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "How suburb rankings shifted, 2002-2024",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 420,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafe_rankings.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 4,
+        "opacity": 0.9,
+        "point": {
+          "filled": true,
+          "size": 120
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": -45,
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleColor": "#FAF6EE",
+            "titleFontSize": 12
+          }
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1,
+              6
+            ],
+            "reverse": true
+          },
+          "axis": {
+            "title": "Rank (1 = most cafes)",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "tickCount": 6,
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        },
+        "color": {
+          "field": "area",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Melbourne (CBD)",
+              "Carlton",
+              "Docklands",
+              "North Melbourne",
+              "Southbank",
+              "East Melbourne",
+              "West Melbourne (Residential)"
+            ],
+            "range": [
+              "#F5A623",
+              "#C8843A",
+              "#A0622A",
+              "#7A4F2E",
+              "#5C3A1E",
+              "#3E1F00",
+              "#D4A96A"
+            ]
+          },
+          "legend": {
+            "title": "Suburb",
+            "orient": "right",
+            "labelColor": "#FAF6EE",
+            "titleColor": "#FAF6EE",
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "symbolSize": 200,
+            "symbolStrokeWidth": 3
+          }
+        },
+        "detail": {
+          "field": "area",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "rank",
+            "type": "quantitative",
+            "title": "Rank"
+          },
+          {
+            "field": "cafe_count",
+            "type": "quantitative",
+            "title": "Cafes"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2024'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#FAF6EE"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1,
+              6
+            ],
+            "reverse": true
+          }
+        },
+        "text": {
+          "field": "area",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}

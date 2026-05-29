@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Number of cafes and restaurants per suburb (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 340,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafes_2024.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "cafe_count",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelFontSize": 12,
+            "labelColor": "rgba(250,246,238,0.7)",
+            "titleColor": "#FAF6EE",
+            "titleFontSize": 12
+          }
+        },
+        "x": {
+          "field": "cafe_count",
+          "type": "quantitative",
+          "axis": {
+            "title": "Number of cafes",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "color": {
+          "field": "cafe_count",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#7A4F2E",
+              "#F5A623"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "cafe_count",
+            "type": "quantitative",
+            "title": "Cafes"
+          },
+          {
+            "field": "total_seats",
+            "type": "quantitative",
+            "title": "Seats"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.area == 'Carlton'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "fontSize": 11,
+        "color": "#FAF6EE",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "cafe_count",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "cafe_count",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "60 cafes/km\u00b2"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.area == 'Melbourne (CBD)'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "fontSize": 11,
+        "color": "#1E0D00",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "cafe_count",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "cafe_count",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "243 cafes/km\u00b2"
+        }
+      }
+    }
+  ]
+}

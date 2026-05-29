@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Cafe and seat access per 1,000 residents by suburb",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 400,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/gem_score.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.area != 'Melbourne (CBD)'"
+    },
+    {
+      "fold": [
+        "cafes_per_1000",
+        "seats_per_1000"
+      ],
+      "as": [
+        "metric",
+        "value"
+      ]
+    },
+    {
+      "calculate": "datum.metric == 'cafes_per_1000' ? 'Cafes per 1,000' : 'Seats per 1,000'",
+      "as": "metric_label"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1.5,
+        "color": "rgba(250,246,238,0.2)"
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "seats_per_1000",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelColor": "rgba(250,246,238,0.9)",
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "field": "cafes_per_1000",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "seats_per_1000"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 100,
+        "opacity": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "seats_per_1000",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelColor": "rgba(250,246,238,0.9)",
+            "labelFontSize": 12
+          }
+        },
+        "x": {
+          "field": "value",
+          "type": "quantitative",
+          "axis": {
+            "title": "Per 1,000 residents",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "color": {
+          "field": "metric_label",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Cafes per 1,000",
+              "Seats per 1,000"
+            ],
+            "range": [
+              "#F5A623",
+              "#00BCD4"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "labelFontSize": 12,
+            "labelColor": "#FAF6EE",
+            "direction": "horizontal",
+            "symbolSize": 120
+          }
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "metric_label",
+            "type": "nominal",
+            "title": "Metric"
+          },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Value",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ]
+}

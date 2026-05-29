@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "City-wide indoor vs outdoor seating split (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 300,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafes_2024.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "indoor_seats",
+        "outdoor_seats"
+      ],
+      "as": [
+        "seating_type",
+        "seats"
+      ]
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "seats",
+          "as": "total"
+        }
+      ],
+      "groupby": [
+        "seating_type"
+      ]
+    },
+    {
+      "calculate": "datum.seating_type == 'indoor_seats' ? 'Indoor' : 'Outdoor'",
+      "as": "label"
+    }
+  ],
+  "mark": {
+    "type": "arc",
+    "innerRadius": 80,
+    "outerRadius": 140
+  },
+  "encoding": {
+    "theta": {
+      "field": "total",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "label",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Indoor",
+          "Outdoor"
+        ],
+        "range": [
+          "#7A4F2E",
+          "#D4A96A"
+        ]
+      },
+      "legend": {
+        "title": "Seating type",
+        "orient": "bottom",
+        "labelFontSize": 12,
+        "labelColor": "#FAF6EE",
+        "titleColor": "#FAF6EE",
+        "titleFontSize": 12
+      }
+    },
+    "tooltip": [
+      {
+        "field": "label",
+        "type": "nominal",
+        "title": "Type"
+      },
+      {
+        "field": "total",
+        "type": "quantitative",
+        "title": "Seats"
+      }
+    ]
+  }
+}

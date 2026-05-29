@@ -1,0 +1,132 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Gem score ranking \u2014 all suburbs (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 280,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/gem_score.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "size": 250,
+        "opacity": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "gem_score",
+            "order": "descending"
+          },
+          "axis": {
+            "title": null,
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleColor": "#FAF6EE",
+            "titleFontSize": 12
+          }
+        },
+        "x": {
+          "field": "gem_score",
+          "type": "quantitative",
+          "axis": {
+            "title": "Gem score (0 = most crowded, 100 = most accessible)",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "color": {
+          "field": "gem_score",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              10,
+              25,
+              100
+            ],
+            "range": [
+              "#F5ECD7",
+              "#D4A96A",
+              "#C8843A",
+              "#3E1F00"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "gem_score",
+            "type": "quantitative",
+            "title": "Gem score"
+          },
+          {
+            "field": "cafes_per_1000",
+            "type": "quantitative",
+            "title": "Cafes per 1,000"
+          },
+          {
+            "field": "seats_per_1000",
+            "type": "quantitative",
+            "title": "Seats per 1,000"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 14,
+        "color": "#999999"
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "gem_score",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "gem_score",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "gem_score",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ]
+}

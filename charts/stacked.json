@@ -1,0 +1,115 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Indoor vs outdoor seats by suburb (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 340,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafes_2024.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "indoor_seats",
+        "outdoor_seats"
+      ],
+      "as": [
+        "seating_type",
+        "seats"
+      ]
+    },
+    {
+      "calculate": "datum.seating_type == 'indoor_seats' ? 'Indoor' : 'Outdoor'",
+      "as": "label"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "y": {
+      "field": "area",
+      "type": "nominal",
+      "sort": {
+        "field": "seats",
+        "op": "sum",
+        "order": "descending"
+      },
+      "axis": {
+        "title": null,
+        "labelColor": "rgba(250,246,238,0.7)",
+        "labelFontSize": 12,
+        "titleColor": "#FAF6EE",
+        "titleFontSize": 12
+      }
+    },
+    "x": {
+      "field": "seats",
+      "type": "quantitative",
+      "axis": {
+        "title": "Number of seats",
+        "titleColor": "#FAF6EE",
+        "labelColor": "rgba(250,246,238,0.7)",
+        "labelFontSize": 12,
+        "titleFontSize": 12
+      }
+    },
+    "color": {
+      "field": "label",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Indoor",
+          "Outdoor"
+        ],
+        "range": [
+          "#7A4F2E",
+          "#D4A96A"
+        ]
+      },
+      "legend": {
+        "title": "Seating type",
+        "orient": "bottom",
+        "direction": "horizontal",
+        "labelColor": "#FAF6EE",
+        "titleColor": "#FAF6EE",
+        "labelFontSize": 12,
+        "titleFontSize": 12
+      }
+    },
+    "tooltip": [
+      {
+        "field": "area",
+        "type": "nominal",
+        "title": "Suburb"
+      },
+      {
+        "field": "label",
+        "type": "nominal",
+        "title": "Type"
+      },
+      {
+        "field": "seats",
+        "type": "quantitative",
+        "title": "Seats"
+      }
+    ]
+  }
+}

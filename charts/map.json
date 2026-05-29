@@ -1,8 +1,28 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Cafe density across inner Melbourne suburbs",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
   "width": "container",
   "height": 520,
   "background": "transparent",
+  "params": [
+    {
+      "name": "year_selection",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2002,
+        "max": 2024,
+        "step": 1,
+        "name": "Select year: "
+      }
+    }
+  ],
   "config": {
     "font": "Lato",
     "legend": {
@@ -13,69 +33,136 @@
       "titleColor": "#3E1F00",
       "labelColor": "#3E1F00"
     },
-    "view": { "stroke": null }
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
   },
   "layer": [
     {
       "data": {
-        "url": "data/suburbs.geojson",
-        "format": { "type": "json", "property": "features" }
+        "url": "data/cafes_by_area_year.csv"
       },
       "transform": [
         {
-          "lookup": "properties.featurenam",
+          "filter": "datum.year == toString(year_selection)"
+        },
+        {
+          "filter": "datum.area != 'West Melbourne (Industrial)'"
+        },
+        {
+          "lookup": "area",
           "from": {
-            "data": { "url": "data/cafes_2024.csv" },
-            "key": "area",
-            "fields": ["cafe_count", "total_seats"]
-          }
+            "data": {
+              "url": "data/suburbs.geojson",
+              "format": {
+                "type": "json",
+                "property": "features"
+              }
+            },
+            "key": "properties.featurenam",
+            "fields": [
+              "geometry"
+            ]
+          },
+          "as": "geo"
         }
       ],
-      "projection": { "type": "mercator" },
+      "projection": {
+        "type": "mercator"
+      },
       "mark": {
         "type": "geoshape",
-        "stroke": "#FAF6EE",
+        "stroke": "#F5A623",
         "strokeWidth": 2
       },
       "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
         "color": {
           "field": "cafe_count",
           "type": "quantitative",
           "scale": {
-            "range": ["#F5ECD7", "#D4A96A", "#C8843A", "#7A4F2E", "#3E1F00"],
-            "domain": [0, 50, 100, 200, 600]
+            "type": "threshold",
+            "domain": [
+              20,
+              60,
+              150
+            ],
+            "range": [
+              "#F5ECD7",
+              "#D4A96A",
+              "#C8843A",
+              "#3E1F00"
+            ]
           },
           "legend": {
-            "title": "Cafes (2024)",
-            "orient": "bottom-right",
+            "title": "Number of cafes",
+            "orient": "top-left",
             "gradientLength": 140,
-            "gradientThickness": 12
+            "gradientThickness": 12,
+            "offset": 8,
+            "labelColor": "#FAF6EE",
+            "titleColor": "#FAF6EE",
+            "labelFontSize": 12,
+            "titleFontSize": 12
           }
         },
         "tooltip": [
-          { "field": "properties.featurenam", "type": "nominal",      "title": "Suburb"       },
-          { "field": "cafe_count",             "type": "quantitative", "title": "Cafes"        },
-          { "field": "total_seats",            "type": "quantitative", "title": "Total seats"  }
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "cafe_count",
+            "type": "quantitative",
+            "title": "Cafes"
+          },
+          {
+            "field": "total_seats",
+            "type": "quantitative",
+            "title": "Total seats"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          }
         ]
       }
     },
     {
-      "data": { "url": "data/cafes_dots_2024.csv" },
-      "projection": { "type": "mercator" },
+      "data": {
+        "url": "data/suburb_centroids.csv"
+      },
+      "projection": {
+        "type": "mercator"
+      },
       "mark": {
-        "type": "circle",
-        "opacity": 0.45,
-        "size": 14,
-        "color": "#FAF6EE",
-        "stroke": "#3E1F00",
-        "strokeWidth": 0.5
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#4f4949"
       },
       "encoding": {
-        "longitude": { "field": "lon", "type": "quantitative" },
-        "latitude":  { "field": "lat", "type": "quantitative" },
-        "tooltip": [
-          { "field": "area", "type": "nominal", "title": "Suburb" }
-        ]
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "area",
+          "type": "nominal"
+        }
       }
     }
   ]

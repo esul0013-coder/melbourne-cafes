@@ -1,0 +1,158 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Hidden gem suburbs: cafes and seats per 1,000 residents (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 360,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/gem_score.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.area != 'Melbourne (CBD)'"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "cafes_per_1000",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              10
+            ]
+          },
+          "axis": {
+            "title": "Cafes per 1,000 residents",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "y": {
+          "field": "seats_per_1000",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1100
+            ]
+          },
+          "axis": {
+            "title": "Seats per 1,000 residents",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "size": {
+          "field": "total_seats",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              500,
+              1000
+            ]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "gem_score",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#D4A96A",
+              "#C8843A",
+              "#3E1F00"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "gem_score",
+            "type": "quantitative",
+            "title": "Gem score"
+          },
+          {
+            "field": "cafes_per_1000",
+            "type": "quantitative",
+            "title": "Cafes per 1,000",
+            "format": ".2f"
+          },
+          {
+            "field": "seats_per_1000",
+            "type": "quantitative",
+            "title": "Seats per 1,000",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -2,
+        "dx":40,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#FFFFFF"
+      },
+      "encoding": {
+        "x": {
+          "field": "cafes_per_1000",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              9
+            ]
+          }
+        },
+        "y": {
+          "field": "seats_per_1000",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1100
+            ]
+          }
+        },
+        "text": {
+          "field": "area",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Cafe density \u2014 cafes per square kilometre by suburb (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 420,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafe_density.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "area",
+          "type": "nominal",
+          "sort": {
+            "field": "cafes_per_sqkm",
+            "order": "descending"
+          },
+          "scale": {
+            "bandSize": 28
+          },
+          "axis": {
+            "title": null,
+            "labelColor": "rgba(250,246,238,0.9)",
+            "labelFontSize": 12,
+            "titleColor": "#999999",
+            "titleFontSize": 12
+          }
+        },
+        "x": {
+          "field": "cafes_per_sqkm",
+          "type": "quantitative",
+          "axis": {
+            "title": "Cafes per km\u00b2",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "color": {
+          "field": "cafes_per_sqkm",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              "#7A4F2E",
+              "#F5A623"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "area",
+            "type": "nominal",
+            "title": "Suburb"
+          },
+          {
+            "field": "cafe_count",
+            "type": "quantitative",
+            "title": "Total cafes"
+          },
+          {
+            "field": "area_sqkm",
+            "type": "quantitative",
+            "title": "Area (km\u00b2)",
+            "format": ".2f"
+          },
+          {
+            "field": "cafes_per_sqkm",
+            "type": "quantitative",
+            "title": "Cafes per km\u00b2",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

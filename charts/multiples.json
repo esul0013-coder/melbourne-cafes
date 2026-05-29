@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": "#ffffff",
+      "strokeWidth": 1
+    },
+    "facet": {
+      "spacing": 12
+    }
+  },
+  "data": {
+    "url": "data/cafes_by_area_year.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.area == 'Carlton' || datum.area == 'Docklands' || datum.area == 'East Melbourne'"
+    },
+    {
+      "fold": [
+        "indoor_seats",
+        "outdoor_seats"
+      ],
+      "as": [
+        "seating_type",
+        "seats"
+      ]
+    },
+    {
+      "calculate": "datum.seating_type == 'indoor_seats' ? 'Indoor' : 'Outdoor'",
+      "as": "label"
+    }
+  ],
+  "facet": {
+    "field": "area",
+    "type": "nominal",
+    "columns": 3,
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#FAF6EE",
+      "labelFontWeight": "bold",
+      "title": null
+    }
+  },
+  "spec": {
+    "width": 220,
+    "height": 130,
+    "mark": {
+      "type": "area",
+      "opacity": 0.85
+    },
+    "encoding": {
+      "x": {
+        "field": "year",
+        "type": "ordinal",
+        "axis": {
+          "title": null,
+          "labelAngle": -90,
+          "labelFontSize": 9,
+          "labelColor": "rgba(250,246,238,0.7)",
+          "values": [
+            "2002",
+            "2008",
+            "2014",
+            "2020",
+            "2024"
+          ]
+        }
+      },
+      "y": {
+        "field": "seats",
+        "type": "quantitative",
+        "stack": true,
+        "axis": {
+          "title": null,
+          "labelFontSize": 9,
+          "tickCount": 3,
+          "labelColor": "rgba(250,246,238,0.7)"
+        }
+      },
+      "color": {
+        "field": "label",
+        "type": "nominal",
+        "scale": {
+          "domain": [
+            "Indoor",
+            "Outdoor"
+          ],
+          "range": [
+            "#7A4F2E",
+            "#D4A96A"
+          ]
+        },
+        "legend": {
+          "title": "Seating",
+          "orient": "top",
+          "labelFontSize": 12,
+          "labelColor": "#FAF6EE",
+          "titleColor": "#FAF6EE"
+        }
+      },
+      "tooltip": [
+        {
+          "field": "area",
+          "type": "nominal",
+          "title": "Suburb"
+        },
+        {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year"
+        },
+        {
+          "field": "label",
+          "type": "nominal",
+          "title": "Type"
+        },
+        {
+          "field": "seats",
+          "type": "quantitative",
+          "title": "Seats"
+        }
+      ]
+    }
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  }
+}

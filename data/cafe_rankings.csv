@@ -1,0 +1,139 @@
+year,area,cafe_count,rank
+2002,Melbourne (CBD),443,1
+2002,Carlton,118,2
+2002,North Melbourne,26,3
+2002,Southbank,23,4
+2002,West Melbourne (Residential),23,5
+2002,East Melbourne,20,6
+2003,Melbourne (CBD),443,1
+2003,Carlton,120,2
+2003,North Melbourne,31,3
+2003,East Melbourne,24,4
+2003,Southbank,23,5
+2003,West Melbourne (Residential),23,6
+2004,Melbourne (CBD),460,1
+2004,Carlton,120,2
+2004,North Melbourne,31,3
+2004,East Melbourne,24,4
+2004,Southbank,23,5
+2004,West Melbourne (Residential),23,6
+2005,Melbourne (CBD),467,1
+2005,Carlton,128,2
+2005,North Melbourne,37,3
+2005,East Melbourne,31,4
+2005,West Melbourne (Residential),26,5
+2005,Docklands,25,6
+2006,Melbourne (CBD),483,1
+2006,Carlton,128,2
+2006,North Melbourne,37,3
+2006,East Melbourne,31,4
+2006,Southbank,26,5
+2006,West Melbourne (Residential),26,6
+2007,Melbourne (CBD),495,1
+2007,Carlton,138,2
+2007,North Melbourne,38,3
+2007,East Melbourne,35,4
+2007,Docklands,30,5
+2007,Southbank,26,6
+2008,Melbourne (CBD),513,1
+2008,Carlton,138,2
+2008,North Melbourne,38,3
+2008,East Melbourne,35,4
+2008,Docklands,30,5
+2008,Southbank,26,6
+2009,Melbourne (CBD),532,1
+2009,Carlton,147,2
+2009,Docklands,47,3
+2009,North Melbourne,46,4
+2009,East Melbourne,34,5
+2009,West Melbourne (Residential),28,6
+2010,Melbourne (CBD),547,1
+2010,Carlton,147,2
+2010,Docklands,47,3
+2010,North Melbourne,46,4
+2010,East Melbourne,34,5
+2010,West Melbourne (Residential),28,6
+2011,Melbourne (CBD),567,1
+2011,Carlton,147,2
+2011,Docklands,47,3
+2011,North Melbourne,46,4
+2011,Southbank,37,5
+2011,East Melbourne,34,6
+2012,Melbourne (CBD),579,1
+2012,Carlton,148,2
+2012,North Melbourne,47,3
+2012,Docklands,45,4
+2012,Southbank,37,5
+2012,East Melbourne,35,6
+2013,Melbourne (CBD),605,1
+2013,Carlton,148,2
+2013,North Melbourne,47,3
+2013,Southbank,46,4
+2013,Docklands,45,5
+2013,East Melbourne,35,6
+2014,Melbourne (CBD),608,1
+2014,Carlton,155,2
+2014,Docklands,57,3
+2014,North Melbourne,50,4
+2014,Southbank,46,5
+2014,East Melbourne,32,6
+2015,Melbourne (CBD),621,1
+2015,Carlton,155,2
+2015,Docklands,57,3
+2015,North Melbourne,50,4
+2015,Southbank,50,5
+2015,East Melbourne,32,6
+2016,Melbourne (CBD),623,1
+2016,Carlton,171,2
+2016,Docklands,65,3
+2016,North Melbourne,58,4
+2016,Southbank,50,5
+2016,East Melbourne,36,6
+2017,Melbourne (CBD),627,1
+2017,Carlton,171,2
+2017,Docklands,65,3
+2017,North Melbourne,58,4
+2017,Southbank,51,5
+2017,East Melbourne,36,6
+2018,Melbourne (CBD),636,1
+2018,Carlton,163,2
+2018,Docklands,69,3
+2018,North Melbourne,60,4
+2018,Southbank,51,5
+2018,East Melbourne,35,6
+2019,Melbourne (CBD),635,1
+2019,Carlton,163,2
+2019,Docklands,69,3
+2019,North Melbourne,60,4
+2019,Southbank,52,5
+2019,East Melbourne,35,6
+2020,Melbourne (CBD),595,1
+2020,Carlton,157,2
+2020,Docklands,71,3
+2020,North Melbourne,53,4
+2020,Southbank,50,5
+2020,West Melbourne (Residential),33,6
+2021,Melbourne (CBD),590,1
+2021,Carlton,157,2
+2021,Docklands,70,3
+2021,North Melbourne,53,4
+2021,Southbank,48,5
+2021,West Melbourne (Residential),33,6
+2022,Melbourne (CBD),564,1
+2022,Carlton,153,2
+2022,Docklands,70,3
+2022,North Melbourne,55,4
+2022,Southbank,48,5
+2022,West Melbourne (Residential),30,6
+2023,Melbourne (CBD),564,1
+2023,Carlton,164,2
+2023,Docklands,63,3
+2023,North Melbourne,58,4
+2023,Southbank,52,5
+2023,West Melbourne (Residential),36,6
+2024,Melbourne (CBD),603,1
+2024,Carlton,164,2
+2024,Docklands,63,3
+2024,North Melbourne,58,4
+2024,Southbank,52,5
+2024,West Melbourne (Residential),36,6

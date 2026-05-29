@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Dining seats per 1,000 residents by suburb (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 300,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/gem_score.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "area",
+      "type": "nominal",
+      "sort": {
+        "field": "seats_per_1000",
+        "order": "descending"
+      },
+      "axis": {
+        "title": null,
+        "labelColor": "rgba(250,246,238,0.7)",
+        "labelFontSize": 12,
+        "titleColor": "#FAF6EE",
+        "titleFontSize": 12
+      }
+    },
+    "x": {
+      "field": "seats_per_1000",
+      "type": "quantitative",
+      "axis": {
+        "title": "Seats per 1,000 residents",
+        "titleColor": "#FAF6EE",
+        "labelColor": "rgba(250,246,238,0.7)",
+        "labelFontSize": 12,
+        "titleFontSize": 12
+      }
+    },
+    "color": {
+      "field": "seats_per_1000",
+      "type": "quantitative",
+      "scale": {
+        "range": [
+          "#D4A96A",
+          "#3E1F00"
+        ]
+      },
+      "legend": null
+    },
+    "tooltip": [
+      {
+        "field": "area",
+        "type": "nominal",
+        "title": "Suburb"
+      },
+      {
+        "field": "seats_per_1000",
+        "type": "quantitative",
+        "title": "Seats per 1,000",
+        "format": ".1f"
+      },
+      {
+        "field": "total_seats",
+        "type": "quantitative",
+        "title": "Total seats"
+      },
+      {
+        "field": "population",
+        "type": "quantitative",
+        "title": "Population"
+      }
+    ]
+  }
+}

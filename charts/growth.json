@@ -1,0 +1,196 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Melbourne cafe count and annual growth rate (2002-2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 340,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "color": "#FAF6EE",
+      "fontSize": 14
+    }
+  },
+  "data": {
+    "url": "data/cafes_by_year.csv"
+  },
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.6,
+        "color": "#C8843A",
+        "line": {
+          "color": "#7A4F2E",
+          "strokeWidth": 2
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": -45,
+            "labelColor": "rgba(250,246,238,0.7)",
+            "titleColor": "#FAF6EE",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "y": {
+          "field": "cafe_count",
+          "type": "quantitative",
+          "axis": {
+            "title": "Number of cafes",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "cafe_count",
+            "type": "quantitative",
+            "title": "Cafes"
+          },
+          {
+            "field": "growth_rate",
+            "type": "quantitative",
+            "title": "Growth rate (%)"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.growth_rate != ''"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "color": "#F5A623",
+        "strokeWidth": 2,
+        "strokeDash": [
+          4,
+          2
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "growth_rate",
+          "type": "quantitative",
+          "axis": {
+            "title": "Growth rate (%)",
+            "titleColor": "#FAF6EE",
+            "labelColor": "rgba(250,246,238,0.7)",
+            "orient": "right",
+            "labelFontSize": 12,
+            "titleFontSize": 12
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2020'"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#fbfbfb",
+        "strokeDash": [
+          4,
+          4
+        ],
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2020'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": -90,
+        "color": "#FAF6EE",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "text": {
+          "value": "COVID-19"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year == '2018'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -12,
+        "fontSize": 11,
+        "color": "#F5A623",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "cafe_count",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Peak: 1,126"
+        }
+      }
+    }
+  ]
+}

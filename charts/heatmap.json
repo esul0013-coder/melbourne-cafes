@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Number of cafes by suburb and year (2002-2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 320,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "view": { "stroke": null },
+    "title": { "color": "#FAF6EE", "fontSize": 14 }
+  },
+  "data": { "url": "data/cafes_by_area_year.csv" },
+  "transform": [
+    { "filter": "datum.area != 'West Melbourne (Industrial)'" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "rect", "cornerRadius": 2 },
+      "encoding": {
+        "x": {
+          "field": "year", "type": "ordinal",
+          "axis": { "title": "Year", "labelAngle": -45, "labelColor": "rgba(250,246,238,0.7)", "labelFontSize": 12, "titleColor": "#FAF6EE", "titleFontSize": 12 }
+        },
+        "y": {
+          "field": "area", "type": "nominal",
+          "sort": { "field": "cafe_count", "order": "descending" },
+          "axis": { "title": null, "labelColor": "rgba(250,246,238,0.7)", "labelFontSize": 12, "titleColor": "#FAF6EE", "titleFontSize": 12 }
+        },
+        "color": {
+          "field": "cafe_count", "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [10, 40, 100, 250],
+            "range": ["#C8A882", "#D4A96A", "#C8843A", "#7A4F2E", "#3E1F00"]
+          },
+          "legend": { "title": "Cafes", "orient": "right", "labelColor": "#FAF6EE", "titleColor": "#FAF6EE", "labelFontSize": 12, "titleFontSize": 12 }
+        },
+        "tooltip": [
+          { "field": "area", "type": "nominal", "title": "Suburb" },
+          { "field": "year", "type": "ordinal", "title": "Year" },
+          { "field": "cafe_count", "type": "quantitative", "title": "Cafes" }
+        ]
+      }
+    },
+    {
+      "transform": [ { "filter": "datum.area == 'Docklands' && datum.year == '2009'" } ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -8,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#FAF6EE"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "area", "type": "nominal" },
+        "text": { "value": "↑ Docklands emerges" }
+      }
+    }
+  ]
+}

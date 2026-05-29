@@ -1,0 +1,92 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Hidden gem score by suburb (2024)",
+    "color": "#FAF6EE",
+    "fontSize": 14,
+    "font": "Lato",
+    "fontWeight": "bold"
+  },
+  "width": "container",
+  "height": 520,
+  "background": "transparent",
+  "config": {
+    "font": "Lato",
+    "legend": { "labelFont": "Lato", "titleFont": "Lato", "labelFontSize": 12, "titleFontSize": 12, "titleColor": "#FAF6EE", "labelColor": "#FAF6EE" },
+    "view": { "stroke": null }
+  },
+  "layer": [
+    {
+      "data": { "url": "data/cafes_by_area_year.csv" },
+      "transform": [
+        { "filter": "datum.year == '2024'" },
+        { "filter": "datum.area != 'West Melbourne (Industrial)'" },
+        {
+          "lookup": "area",
+          "from": {
+            "data": { "url": "data/gem_score.csv" },
+            "key": "area",
+            "fields": ["gem_score", "cafes_per_1000", "seats_per_1000"]
+          }
+        },
+        {
+          "lookup": "area",
+          "from": {
+            "data": { "url": "data/suburbs.geojson", "format": { "type": "json", "property": "features" } },
+            "key": "properties.featurenam",
+            "fields": ["geometry"]
+          },
+          "as": "geo"
+        }
+      ],
+      "projection": { "type": "mercator" },
+      "mark": { "type": "geoshape", "stroke": "#F5A623", "strokeWidth": 2 },
+      "encoding": {
+        "shape": { "field": "geo", "type": "geojson" },
+        "color": {
+          "field": "gem_score", "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [10, 25, 40],
+            "range": ["#F5ECD7", "#D4A96A", "#C8843A", "#3E1F00"]
+          },
+          "legend": { "title": "Gem score", "orient": "top-left", "gradientLength": 140, "gradientThickness": 12, "offset": 8, "labelColor": "#FAF6EE", "titleColor": "#FAF6EE" }
+        },
+        "tooltip": [
+          { "field": "area", "type": "nominal", "title": "Suburb" },
+          { "field": "gem_score", "type": "quantitative", "title": "Gem score" },
+          { "field": "cafes_per_1000", "type": "quantitative", "title": "Cafes per 1,000", "format": ".2f" },
+          { "field": "seats_per_1000", "type": "quantitative", "title": "Seats per 1,000", "format": ".1f" }
+        ]
+      }
+    },
+    {
+      "data": { "url": "data/suburb_centroids.csv" },
+      "transform": [ { "filter": "datum.area != 'West Melbourne (Industrial)'" } ],
+      "projection": { "type": "mercator" },
+      "mark": { "type": "text", "fontSize": 13, "fontWeight": "bold", "color": "#4f4949" },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
+        "text": { "field": "area", "type": "nominal" }
+      }
+    },
+    {
+      "data": { "url": "data/suburb_centroids.csv" },
+      "transform": [ { "filter": "datum.area == 'Docklands'" } ],
+      "projection": { "type": "mercator" },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#F5A623",
+        "dy": 18
+      },
+      "encoding": {
+        "longitude": { "field": "lon", "type": "quantitative" },
+        "latitude": { "field": "lat", "type": "quantitative" },
+        "text": { "value": "★ Top gem score"}
+      }
+    }
+  ]
+}
